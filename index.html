@@ -186,8 +186,7 @@
 
           const bookInfo = document.createElement("div");
           bookInfo.className = "book-info";
-          bookInfo.innerHTML = `<h3>${title}</h3><p><strong>Author(s):</strong> <span class="math-inline">\{authors\}</p\><p\></span>{description.substring(0, 200)}...</p>`;
-          bookContainer.appendChild(bookInfo);
+bookInfo.innerHTML = `<h3>${title}</h3><p><strong>Author(s):</strong> ${authors}</p><p class="description">${description}</p>`;           bookContainer.appendChild(bookInfo);
           resultsDiv.appendChild(bookContainer);
           const infoLink = volumeInfo.infoLink || "#";
           bookContainer.addEventListener("click", () => {
