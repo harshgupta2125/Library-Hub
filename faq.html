@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <title>Library Hub</title>
+  </head>
+
+  <body class="m-0 p-0 bg-gradient-to-r from-purple-500 to-pink-500">
+    <nav class="bg-gray-800 text-white">
+      <div class="container mx-auto flex items-center justify-between py-4">
+        <div class="flex items-center">
+          <img src="logo.png" alt="Library Logo" class="h-8 w-8 mr-2" />
+          <span class="text-xl font-bold text-yellow-300"><a href="index.html">LibraryHub</a></span>
+        </div>
+        <div class="flex space-x-6">
+          <a href="Index.html" class="hover:text-yellow-300">Home</a>
+          <a href="category.html" class="hover:text-yellow-300">Category</a>
+          <a href="about.html" class="hover:text-yellow-300">About</a>
+          <a href="contact.html" class="hover:text-yellow-300">Contact</a>
+          <a href="faq.html" class="hover:text-yellow-300">FAQ</a>
+
+        </div>
+      </div>
+    </nav>
+
+
+<div class="container mx-auto px-4 py-12">
+  <div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-800 mb-4">Frequently Asked Questions</h1>
+      <p class="text-gray-600">Find answers to common questions about our services</p>
+    </div>
+
+    <!-- FAQ Items -->
+    <div class="space-y-4">
+      <!-- FAQ Item 1 -->
+      <div class="border border-gray-200 rounded-lg">
+        <button class="flex justify-between items-center w-full p-4 text-left" 
+                onclick="toggleFAQ(this)">
+          <span class="font-medium text-gray-800">How do I get started?</span>
+          <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-300" 
+               fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="hidden p-4 pt-0">
+          <p class="text-gray-600">
+            Getting started is easy! Simply sign up for an account, choose your preferred plan, 
+            and you'll have immediate access to all our features. Our onboarding process will 
+            guide you through the essential steps.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 2 -->
+      <div class="border border-gray-200 rounded-lg">
+        <button class="flex justify-between items-center w-full p-4 text-left" 
+                onclick="toggleFAQ(this)">
+          <span class="font-medium text-gray-800">What payment methods do you accept?</span>
+          <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-300" 
+               fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="hidden p-4 pt-0">
+          <p class="text-gray-600">
+            We accept all major credit cards (Visa, MasterCard, American Express), PayPal, 
+            and bank transfers. All payments are processed securely through our payment gateway.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 3 -->
+      <div class="border border-gray-200 rounded-lg">
+        <button class="flex justify-between items-center w-full p-4 text-left" 
+                onclick="toggleFAQ(this)">
+          <span class="font-medium text-gray-800">Can I cancel my subscription?</span>
+          <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-300" 
+               fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="hidden p-4 pt-0">
+          <p class="text-gray-600">
+            Yes, you can cancel your subscription at any time. There are no long-term 
+            commitments, and you won't be charged after cancellation. Your access will 
+            continue until the end of your current billing period.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 4 -->
+      <div class="border border-gray-200 rounded-lg">
+        <button class="flex justify-between items-center w-full p-4 text-left" 
+                onclick="toggleFAQ(this)">
+          <span class="font-medium text-gray-800">Is there a free trial available?</span>
+          <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-300" 
+               fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="hidden p-4 pt-0">
+          <p class="text-gray-600">
+            Yes! We offer a 14-day free trial for all new users. You'll have full access 
+            to all features during this period, with no credit card required to start.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="mt-12 text-center">
+      <p class="text-gray-600 mb-4">Still have questions? We're here to help!</p>
+      <a href="contact.html" class="inline-block bg-purple-600 text-white px-6 py-3 rounded-md hover:bg-purple-700 transition duration-300">
+        Contact Support
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript for FAQ toggle -->
+<script>
+function toggleFAQ(button) {
+  const content = button.nextElementSibling;
+  const icon = button.querySelector('svg');
+  
+  // Toggle content visibility
+  content.classList.toggle('hidden');
+  
+  // Rotate icon
+  if (content.classList.contains('hidden')) {
+    icon.classList.remove('rotate-180');
+  } else {
+    icon.classList.add('rotate-180');
+  }
+}
+</script>
+
+<footer class="bg-gray-900 text-gray-400 py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between">
+        <div class="mb-8 md:mb-0">
+          <h2 class="text-white font-bold mb-4 text-purple-500">About Us</h2>
+          <p>
+            Discover our world of broadcasting and entertainment through books
+          </p>
+        </div>
+        <div class="mb-8 md:mb-0">
+          <h2 class="text-white font-bold mb-4 text-orange-500">
+            Quick Links
+          </h2>
+          <ul>
+            <li>
+              <a href="index.html" class="text-gray-400 hover:text-gray-200"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a
+                href="category.html"
+                class="text-gray-400 hover:text-gray-200"
+                >Explore</a
+              >
+            </li>
+            <li>
+              <a href="about.html" class="text-gray-400 hover:text-gray-200"
+                >About</a
+              >
+            </li>
+            <li>
+              <a href="contact.html" class="text-gray-400 hover:text-gray-200"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="mb-8 md:mb-0">
+          <h2 class="text-white font-bold mb-4 text-green-500">
+            Contact Info
+          </h2>
+          <p>
+            <span class="text-gray-400">Address:</span>
+            <br />
+            123 Main Street, Anytown, CA 12345
+          </p>
+          <p>
+            <span class="text-gray-400">Phone:</span>
+            <br />
+            (123) 456-7890
+          </p>
+        </div>
+        <div>
+          <h2 class="text-white font-bold mb-4 text-red-500">Newsletter</h2>
+          <form>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              class="border border-gray-500 rounded-md p-2 mb-4"
+            />
+            <button
+              type="submit"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-4">
+        <p class="text-center text-gray-500">
+          2024 Library Hub. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html

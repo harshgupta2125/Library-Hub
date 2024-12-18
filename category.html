@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+  <title>Library Hub</title>
+</head>
+
+<body class="m-0 p-0 bg-gradient-to-r from-purple-500 to-pink-500">
+  <nav class="bg-gray-800 text-white">
+    <div class="container mx-auto flex items-center justify-between py-4">
+      <div class="flex items-center">
+        <img src="logo.png" alt="Library Logo" class="h-8 w-8 mr-2" />       
+        <span class="text-xl font-bold text-yellow-300"><a href="index.html">LibraryHub</a></span>
+
+      </div>
+      <div class="flex space-x-6">
+        <a href="Index.html" class="hover:text-yellow-300">Home</a>
+        <a href="category.html" class="hover:text-yellow-300">Category</a>
+        <a href="about.html" class="hover:text-yellow-300">About</a>
+        <a href="contact.html" class="hover:text-yellow-300">Contact</a>
+        <a href="faq.html" class="hover:text-yellow-300">FAQ</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mx-auto p-4">
+    <h1 class="text-3xl font-bold text-center mb-6">Books Library</h1>
+    <div id="app">
+      <!-- Content will be dynamically injected here -->
+    </div>
+  </div>
+
+  <footer class="bg-gray-900 text-gray-400 py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between">
+        <div class="mb-8 md:mb-0">
+          <h2 class="text-white font-bold mb-4 text-purple-500">About Us</h2>
+          <p>
+            Discover our world of broadcasting and entertainment through books
+          </p>
+        </div>
+        <div class="mb-8 md:mb-0">
+          <h2 class="text-white font-bold mb-4 text-orange-500">
+            Quick Links
+          </h2>
+          <ul>
+            <li>
+              <a href="index.html" class="text-gray-400 hover:text-gray-200">Home</a>
+            </li>
+            <li>
+              <a href="category.html" class="text-gray-400 hover:text-gray-200">Explore</a>
+            </li>
+            <li>
+              <a href="about.html" class="text-gray-400 hover:text-gray-200">About</a>
+            </li>
+            <li>
+              <a href="contact.html" class="text-gray-400 hover:text-gray-200">Contact</a>
+            </li>
+          </ul>
+        </div>
+        <div class="mb-8 md:mb-0">
+          <h2 class="text-white font-bold mb-4 text-green-500">
+            Contact Info
+          </h2>
+          <p>
+            <span class="text-gray-400">Address:</span>
+            <br />
+            123 Main Street, Anytown, CA 12345
+          </p>
+          <p>
+            <span class="text-gray-400">Phone:</span>
+            <br />
+            (123) 456-7890
+          </p>
+        </div>
+        <div>
+          <h2 class="text-white font-bold mb-4 text-red-500">Newsletter</h2>
+          <form>
+            <input type="email" placeholder="Enter your email" class="border border-gray-500 rounded-md p-2 mb-4" />
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-4">
+        <p class="text-center text-gray-500">
+          2024 Library Hub. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const API_KEY = "AIzaSyCfO0VYeYqG8nZptr-kH3saH4o1wfIbbp0"; // Replace with your API key
+    const API_BASE = "https://www.googleapis.com/books/v1/volumes";
+    const app = document.getElementById("app");
+
+    // Step 1: Display Categories
+    const categories = [
+      "Fiction",
+      "Science",
+      "History",
+      "Technology",
+      "Biography",
+      "Philosophy",
+      "Education",
+      "Health & Fitness",
+      "Travel",
+      "Computers",
+      "Law",
+      "Foreign Language Study"
+    ];
+    function displayCategories() {
+      app.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+          ${categories
+          .map(
+            (category) => `
+              <button 
+                class="bg-blue-500 text-white p-4 rounded shadow-md hover:bg-blue-600"
+                onclick="fetchBooks('${category}')"
+              >
+                ${category}
+              </button>
+            `
+          )
+          .join("")}
+        </div>
+      `;
+    }
+
+
+    // Step 2: Fetch and Display Books in a Category
+    async function fetchBooks(category) {
+      const response = await fetch(
+        `${API_BASE}?q=subject:${category}&key=${API_KEY}`
+      );
+      const data = await response.json();
+
+      if (data.items) {
+        app.innerHTML = `
+          <h2 class="text-2xl font-bold mb-4">Books in ${category}</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            ${data.items
+            .map(
+              (book) => `
+                <div class="bg-white shadow-md p-4 rounded">
+                  <h3 class="text-xl font-semibold">${book.volumeInfo.title
+                }</h3>
+                  <p class="text-sm text-gray-600">${book.volumeInfo.authors?.join(", ") || "Unknown Author"
+                }</p>
+                  <button 
+                    class="mt-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                    onclick="viewBook('${book.id}')"
+                  >
+                    View Book
+                  </button>
+                </div>
+              `
+            )
+            .join("")}
+          </div>
+          <button 
+            class="mt-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+            onclick="displayCategories()"
+          >
+            Back to Categories
+          </button>
+        `;
+      } else {
+        app.innerHTML = `<p class="text-red-500">No books found for this category.</p>`;
+      }
+    }
+    async function fetchBooks(category) {
+      const maxBooks = 100; // Number of books to fetch
+      const batchSize = 40; // Maximum results per API request
+      let books = [];
+
+      for (let startIndex = 0; startIndex < maxBooks; startIndex += batchSize) {
+        const response = await fetch(
+          `${API_BASE}?q=subject:${category}&startIndex=${startIndex}&maxResults=${batchSize}&key=${API_KEY}`
+        );
+        const data = await response.json();
+
+        if (data.items) {
+          books = books.concat(data.items);
+        } else {
+          break; // Exit the loop if no more books are available
+        }
+      }
+
+      if (books.length > 0) {
+        displayBooks(category, books);
+      } else {
+        app.innerHTML = `<p class="text-red-500">No books found for this category.</p>`;
+      }
+    }
+
+    function displayBooks(category, books) {
+      app.innerHTML = `
+          <h2 class="text-2xl font-bold mb-4">Books in ${category} (${books.length} Results)</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            ${books
+          .map(
+            (book) => `
+                <div class="bg-white shadow-md p-4 rounded">
+                  <h3 class="text-xl font-semibold">${book.volumeInfo.title}</h3>
+                  <p class="text-sm text-gray-600">${book.volumeInfo.authors?.join(", ") || "Unknown Author"}</p>
+                  <button 
+                    class="mt-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                    onclick="viewBook('${book.id}')"
+                  >
+                    View Book
+                  </button>
+                </div>
+              `
+          )
+          .join("")}
+          </div>
+          <button 
+            class="mt-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+            onclick="displayCategories()"
+          >
+            Back to Categories
+          </button>
+        `;
+    }
+
+
+    // Step 3: Fetch and Display a Specific Book
+    async function viewBook(bookId) {
+      const response = await fetch(`${API_BASE}/${bookId}?key=${API_KEY}`);
+      const book = await response.json();
+
+      app.innerHTML = `
+        <div class="bg-white shadow-md p-4 rounded">
+          <h2 class="text-2xl font-bold mb-2">${book.volumeInfo.title}</h2>
+          <p class="text-lg text-gray-700 mb-4">${book.volumeInfo.description || "No description available."
+        }</p>
+          <a 
+            href="${book.volumeInfo.previewLink}" 
+            target="_blank" 
+            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          >
+            Read Full Book
+          </a>
+        </div>
+        <button 
+          class="mt-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+          onclick="displayCategories()"
+        >
+          Back to Categories
+        </button>
+      `;
+    }
+
+    // Initialize the app
+    displayCategories();
+  </script>
+</body>
+
+</html>
