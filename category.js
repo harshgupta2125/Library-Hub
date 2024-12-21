@@ -1,4 +1,4 @@
-const API_KEY = "AIzaSyCfO0VYeYqG8nZptr-kH3saH4o1wfIbbp0"; // Replace with your API key
+const API_KEY = "Add your API key"; // Replace with your API key
     const API_BASE = "https://www.googleapis.com/books/v1/volumes";
     const app = document.getElementById("app");
 
